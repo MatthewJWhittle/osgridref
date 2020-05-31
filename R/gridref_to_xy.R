@@ -3,14 +3,14 @@
 #' This function converts ordinance survey grid references to eastings northing
 #'
 #' @param x A vector of ordinance survey grid references such as 'TA 123 231'
-#' @return A data.frame of eastings and northings coordinates and their resolution
+#' @return A tibble of eastings and northings coordinates and their resolution
 #' @import stringr
 #' @importFrom magrittr %>%
 #' @import dplyr
-#' @export 
+#' @export
 gridref_to_xy <- function(x) {
-  # Get the square letters and numbers
-  square_letters <- str_extract(x, "^[a-zA-Z]{2}") %>% str_to_upper()
+  # Get the square letters and numbers using regex
+  square_letters <- toupper(str_extract(x, "^[a-zA-Z]{2}"))
   numbers <- str_extract(x, "[0-9]+ ?[0-9]+") %>% str_remove_all(" ")
 
   # Split the numbers into x and y
@@ -45,8 +45,8 @@ gridref_to_xy <- function(x) {
   # Get the osgb square lookup
   lookup <- osgb_lookup() %>%
     dplyr::mutate(
-      xmin = paste0(x, "00000") %>% as.numeric(),
-      ymin = paste0(y, "00000") %>% as.numeric()
+      xmin = as.numeric(paste0(x, "00000")),
+      ymin = as.numeric(paste0(y, "00000"))
     )
 
 
