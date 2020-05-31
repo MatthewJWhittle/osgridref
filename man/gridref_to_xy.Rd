@@ -10,7 +10,7 @@ gridref_to_xy(x)
 \item{x}{A vector of ordinance survey grid references such as 'TA 123 231'}
 }
 \value{
-A data.frame of eastings and northings coordinates and their resolution
+A tibble of eastings and northings coordinates and their resolution
 }
 \description{
 This function converts ordinance survey grid references to eastings northing

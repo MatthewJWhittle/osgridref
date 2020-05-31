@@ -1,15 +1,14 @@
 Package: osgridref
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Convert Ordinance Survey Grid References to Numeric Eastings and Northings
+Version: 0.1.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Matthew",
+           family = "Whittle",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+           email = "matthewjwhittle@gmail.com",
+           comment = c(ORCID = "0000-0003-2151-6818"))
+Description: osgridref provides functions for converting between Ordinance Survey National Grid references and all-numeric eastings, northings coordinates (EPSG:27700).
+License: use_mit_license()
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
