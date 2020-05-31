@@ -1,16 +1,21 @@
-osgb_lookup <- function(){
-  # First letter identifies the 500x500 km grid
-  offset1 <- list(
-    "S" = c(x = 0, y = 0),
+#' OS GB Look up table
+#'
+#' This function creates a lookup table of os grid square letters and numbers
+#' @keywords osgb grid reference look up
+#' @return A \code{data.frame} with 3 columns, the letters identifying each square and their x and y min coordinates
+osgb_lookup <- function() {
+
+  letter1 <- list(
+    "S" = c(0, 0),
     "T" = c(5, 0),
     "N" = c(0, 5),
     "H" = c(0, 10),
     "O" = c(5, 5)
   )
-  offset1 <- do.call(rbind, offset1)
-  
-  # Second letter identifies the 100x100 km grid
-  offset2 <- list(
+  letter1 <- do.call(rbind, letter1)
+
+
+  letter2 <- list(
     "A" = c(y = 4, x = 0),
     "B" = c(4, 1),
     "C" = c(4, 2),
@@ -37,20 +42,23 @@ osgb_lookup <- function(){
     "Y" = c(0, 3),
     "Z" = c(0, 4)
   )
-  offset2 <- do.call(rbind, offset2)[, c("x", "y")]
-  
-  letter1 <- rownames(offset1)
-  letter2 <- rownames(offset2)
-  
-  
-  lookup <-
-    c(1:dim(offset1)[1]) %>%
-    lapply(function(i) {
-      numbers <- offset1[i, ] + offset2
-      
-      cbind.data.frame(square_letters =  paste0(letter1[i], letter2), numbers, stringsAsFactors = F) 
-    }) %>% bind_rows()
-  
-  as_tibble(lookup)
+  letter2 <- do.call(rbind, letter2)[, c("x", "y")]
+
+  square_letter1 <- rownames(letter1)
+  square_letter2 <- rownames(letter2)
+
+
+  lookup_list <-
+  lapply(
+  c(1:dim(letter1)[1]),
+  function(i) {
+    numbers <- letter1[i,] + letter2
+
+    cbind.data.frame(square_letters = paste0(square_letter1[i], square_letter2), numbers, stringsAsFactors = F)
+  }
+  )
+  lookup <- as.data.frame(do.call(rbind, lookup_list), stringsAsFators = FALSE)
+
+  return(lookup)
 }
 
