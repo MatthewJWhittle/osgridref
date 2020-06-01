@@ -5,6 +5,8 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 # osgridref
+![Travis Status](https://travis-ci.org/MatthewJWhittle/osgridref.svg?branch=master)
+
 # Overview
 Spatial data is often store as [Ordinance Survey National Grid](https://en.wikipedia.org/wiki/Ordnance_Survey_National_Grid) references. This is an easy way to recorded spatial data in the field but isn't straight forward to convert to coordinates. The goalof the `osgridref` package is to provide a functions to easily convert grid references to eastings and northings (EPSG:27700) and back again.
 

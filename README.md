@@ -3,6 +3,9 @@
 
 # osgridref
 
+![Travis
+Status](https://travis-ci.org/MatthewJWhittle/osgridref.svg?branch=master)
+
 # Overview
 
 Spatial data is often store as [Ordinance Survey National

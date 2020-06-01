@@ -4,9 +4,9 @@
 #'
 #' @param x A vector of ordinance survey grid references such as 'TA 123 231'
 #' @return A tibble of eastings and northings coordinates and their resolution
-#' @import stringr
+#' @importFrom stringr str_extract str_remove_all
 #' @importFrom magrittr %>%
-#' @import dplyr
+#' @importFrom dplyr tibble mutate left_join select
 #' @importFrom rlang .data
 #' @export
 gridref_to_xy <- function(x) {
