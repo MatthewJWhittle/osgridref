@@ -9,17 +9,32 @@
 #' @import dplyr
 #' @export
 gridref_to_xy <- function(x) {
+
+  # Assert that x is a character vector
+  character_vector <- is.vector(x) && is.character(x)
+  if(!character_vector){
+    stop("x is not a character vector")
+  }
   # Get the square letters and numbers using regex
   square_letters <- toupper(str_extract(x, "^[a-zA-Z]{2}"))
   numbers <- str_extract(x, "[0-9]+ ?[0-9]+") %>% str_remove_all(" ")
+
+  # Create a null return
+  null_conversion <- tibble(x = NA, y = NA, resolution = NA)
 
   # Split the numbers into x and y
   # Get the resolution from number of digits
   digits <- nchar(numbers)
   uneven_digits <- !(digits %% 2 == 0)
 
+  # Test that the square letters have been extracted properly
+  bad_format_letters <- is.na(square_letters) | !(nchar(square_letters) == 2)
+
+  # Check for test failure
+  invalid_ref <- uneven_digits | bad_format_letters
+
   # Set invalid grid references to NA
-  numbers[uneven_digits] <- NA
+  numbers[invalid_ref] <- NA
 
   # Split for later addition
   coord_digits <- digits / 2
@@ -36,7 +51,7 @@ gridref_to_xy <- function(x) {
   in_coords <-
     dplyr::tibble(
       in_letters = square_letters,
-      in_ref = x,
+      in_ref = as.character(x),
       resolution = resolution,
       in_x = x_num,
       in_y = y_num
@@ -62,6 +77,13 @@ gridref_to_xy <- function(x) {
   out_coords <-
     out_coords %>%
     dplyr::select(x = out_x, y = out_y, resolution)
+
+  # If any of the grid references are invalid (not meeting tests)
+  # then replace them with NA and print a warning message
+  if(any(invalid_ref)){
+    out_coords[invalid_ref, ] <- NA
+    warning(paste0(sum(invalid_ref), " grid reference(s) failed to parse." ))
+  }
 
   # This could return a spatial object but would have to deal with NA values
   return(out_coords)
