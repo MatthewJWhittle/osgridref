@@ -17,25 +17,25 @@ references to eastings and northings (EPSG:27700) and back again.
 The package can currently be installed from github:
 
 ``` r
-# Or the the development version from GitHub:
+# Install the development version from GitHub:
 # install.packages("devtools")
-# devtools::install_github("matthewjwhittle/osgridref")
-```
-
-``` r
-library(osgridref)
+devtools::install_github("matthewjwhittle/osgridref")
 ```
 
 # Examples
 
 ``` r
-grid_refs <- c("TA 304 403", "SE 2344 0533", "SE13")
+library(osgridref)
+
+grid_refs <- c("TA 304 403", "SE 2344 0533", "SE13", "SE 23444 05334")
+# Returns a tibble of X and Y coords and their resolution
 gridref_to_xy(grid_refs)
 ```
 
-    ## # A tibble: 3 x 3
+    ## # A tibble: 4 x 3
     ##        x      y resolution
     ##    <dbl>  <dbl>      <dbl>
     ## 1 530400 440300        100
     ## 2 423440 405330         10
     ## 3 410000 430000      10000
+    ## 4 423444 405334          1

@@ -8,10 +8,15 @@ Authors@R:
            email = "matthewjwhittle@gmail.com",
            comment = c(ORCID = "0000-0003-2151-6818"))
 Description: osgridref provides functions for converting between Ordinance Survey National Grid references and all-numeric eastings, northings coordinates (EPSG:27700).
-License: use_mit_license()
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Suggests: 
     testthat
+Imports: 
+    dplyr,
+    magrittr,
+    stringr,
+    rlang

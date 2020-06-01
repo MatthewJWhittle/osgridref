@@ -1,3 +1,6 @@
 ^osgridref\.Rproj$
 ^\.Rproj\.user$
 ^development$
+^LICENSE\.md$
+^README.Rmd
+^\.travis\.yml$

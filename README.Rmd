@@ -10,20 +10,19 @@ Spatial data is often store as [Ordinance Survey National Grid](https://en.wikip
 
 # Installation
 The package can currently be installed from github:
-```{r}
-# Or the the development version from GitHub:
+```{r eval=FALSE}
+# Install the development version from GitHub:
 # install.packages("devtools")
-# devtools::install_github("matthewjwhittle/osgridref")
+devtools::install_github("matthewjwhittle/osgridref")
 ```
 
 
-```{r setup, message = FALSE}
-library(osgridref)
-```
 
 
 # Examples
-```{r}
+```{r setup, message = FALSE}
+library(osgridref)
+
 grid_refs <- c("TA 304 403", "SE 2344 0533", "SE13", "SE 23444 05334")
 # Returns a tibble of X and Y coords and their resolution
 gridref_to_xy(grid_refs)

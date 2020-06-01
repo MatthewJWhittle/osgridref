@@ -7,6 +7,7 @@
 #' @import stringr
 #' @importFrom magrittr %>%
 #' @import dplyr
+#' @importFrom rlang .data
 #' @export
 gridref_to_xy <- function(x) {
 
@@ -60,8 +61,8 @@ gridref_to_xy <- function(x) {
   # Get the osgb square lookup
   lookup <- osgb_lookup() %>%
     dplyr::mutate(
-      xmin = as.numeric(paste0(x, "00000")),
-      ymin = as.numeric(paste0(y, "00000"))
+      xmin = as.numeric(paste0(.data$x, "00000")),
+      ymin = as.numeric(paste0(.data$y, "00000"))
     )
 
 
@@ -70,13 +71,13 @@ gridref_to_xy <- function(x) {
     in_coords %>%
     dplyr::left_join(lookup,
                      by = c("in_letters" = "square_letters")) %>%
-    dplyr::mutate(out_x = xmin + in_x,
-                  out_y = ymin + in_y)
+    dplyr::mutate(out_x = .data$xmin + .data$in_x,
+                  out_y = .data$ymin + .data$in_y)
 
   # Select and rename variables for clean output
   out_coords <-
     out_coords %>%
-    dplyr::select(x = out_x, y = out_y, resolution)
+    dplyr::select(x = .data$out_x, y = .data$out_y, .data$resolution)
 
   # If any of the grid references are invalid (not meeting tests)
   # then replace them with NA and print a warning message
