@@ -1,7 +1,4 @@
-require(testthat)
 require(dplyr)
-require(osgridref)
-
 x <- c("SE12233355")
 result <- gridref_to_xy(x)
 

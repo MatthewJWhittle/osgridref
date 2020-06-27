@@ -20,3 +20,5 @@ Imports:
     magrittr,
     stringr,
     rlang
+Depends: 
+    R (>= 2.10)
