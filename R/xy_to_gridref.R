@@ -25,10 +25,10 @@ xy_to_gridref <- function(x, y, digits = 10) {
   lookup_bbox <-
     lookup %>%
     mutate(
-      xmin = paste0(.data$x, "00000") %>% as.numeric(),
-      ymin = paste0(.data$y, "00000") %>% as.numeric(),
-      xmax = .data$xmin + 100000,
-      ymax = .data$ymin + 100000
+      xmin = paste0(x, "00000") %>% as.numeric(),
+      ymin = paste0(y, "00000") %>% as.numeric(),
+      xmax = xmin + 100000,
+      ymax = ymin + 100000
     )
 
   # Work out which square each grid ref is within and return the letters
@@ -51,10 +51,10 @@ xy_to_gridref <- function(x, y, digits = 10) {
     left_join(lookup_bbox, by = c("letters" = "square_letters")) %>%
     # remove the first digit from each coordinate and remove any digits from the end
     mutate(
-      out_x = substr(.data$coord_x, nchar(.data$x) + 1, stop  = (.data$digits  / 2) + 1),
-      out_y = substr(.data$coord_y, nchar(.data$x) + 1, stop  = (.data$digits  / 2) + 1),
+      out_x = substr(coord_x, nchar(x) + 1, stop  = (digits  / 2) + 1),
+      out_y = substr(coord_y, nchar(y) + 1, stop  = (digits  / 2) + 1),
       # Paste the components together with a space seperating them
-      osgb = paste(.data$letters, .data$out_x, .data$out_y)
+      osgb = paste(letters, out_x, out_y)
     )
 
   # Return the grid reference

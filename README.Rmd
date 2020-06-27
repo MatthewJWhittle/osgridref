@@ -27,6 +27,12 @@ library(osgridref)
 
 grid_refs <- c("TA 304 403", "SE 2344 0533", "SE13", "SE 23444 05334")
 # Returns a tibble of X and Y coords and their resolution
-gridref_to_xy(grid_refs)
+xy_table <- gridref_to_xy(grid_refs)
 ```
+
+Convert coordinates back to grid references
+```{r}
+xy_to_gridref(x = xy_table$x, y = xy_table$y, digits = 8)
+```
+
 
